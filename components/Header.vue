@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-// style import in main.scss to avoid splash unstyled content
+// style import in main.scss to avoid splash of unstyled content
 
 import Code from "./icons/Code.vue";
 import Contact from "./icons/Contact.vue";
