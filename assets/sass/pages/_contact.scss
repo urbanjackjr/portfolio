@@ -1,0 +1,30 @@
+.contact {
+	&__desc {
+		margin: 1.25rem 0 2rem;
+
+		@include respond-to("medium") {
+			margin-bottom: 2rem;
+		}
+	}
+
+	&__form {
+		max-width: 60rem;
+	}
+
+	&__address {
+		display: block;
+	}
+
+	&__info {
+		display: flex;
+		align-items: center;
+		color: var(--foreground--600);
+		padding: .5rem 0;
+	}
+
+	&__icon {
+		max-width: 1.25rem;
+		height: 1.25rem;
+		margin-right: .5rem;
+	}
+}

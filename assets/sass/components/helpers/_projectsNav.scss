@@ -1,0 +1,53 @@
+.projects {
+
+    &__nav-toggle {
+        align-self: flex-start;
+        padding: .75rem .5rem;
+        border: .125rem solid var(--foreground);
+        border-width: .125rem 0 .125rem .125rem;
+        background: var(--background--700);
+        cursor: pointer;
+    }
+
+    &__nav {
+        position: fixed;
+        top: 50%;
+        right: 0;
+        width: 100%;
+        display: flex;
+        max-width: 18rem;
+        transform: translate(12rem, -50%);
+        transition: transform 300ms ease;
+
+        @include respond-to("medium") {
+            transform: translate(15rem, -50%);
+        }
+
+        &--active {
+            transform: translate(0, -50%);
+        }
+    }
+
+    &__nav-list {
+        list-style-position: inside;
+        padding: 1rem;
+        background: var(--background);
+        border: .125rem solid var(--foreground);
+        border-width: .125rem 0 .125rem .125rem;
+    }
+
+    &__nav-item {
+        color: var(--foreground--100);
+        pointer-events: none;
+        transition: 300ms ease;
+        padding: .125rem 0;
+
+        &--active {
+            color: var(--white-light);
+            cursor: pointer;
+            pointer-events: all;
+        }
+    }
+}
+
+@include hamburger;

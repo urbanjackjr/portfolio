@@ -1,0 +1,53 @@
+.termynal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    color: var(--background--700);
+    font-family: $mono-font;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-width: 30rem;
+    z-index: 0;
+
+    @include respond-to("small") {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    [data-ty] {
+        display: block;
+        line-height: 2;
+        font-family: inherit;
+    }
+
+    [data-ty="input"],
+    [data-ty-prompt] {
+
+        &::before {
+            margin-right: .75rem;
+        }
+    }
+
+    [data-ty="input"] {
+
+        &::before {
+            content: '$';
+        }
+    }
+
+    [data-ty-prompt] {
+
+        &::before {
+            content: attr(data-ty-prompt);
+        }
+    }
+
+    [data-ty-cursor]:after {
+        content: attr(data-ty-cursor);
+        font-family: monospace;
+        margin-left: 0.5em;
+        animation: blink 1s infinite;
+    }
+}

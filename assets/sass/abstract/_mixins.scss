@@ -1,0 +1,176 @@
+/// Responsive breakpoint manager
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-to($breakpoint) {
+	$raw-query: map-get($breakpoints, $breakpoint);
+
+	@if $raw-query {
+		$query: if(type-of($raw-query)=="string",
+				unquote($raw-query),
+				inspect($raw-query));
+
+		@if $breakpoint=="max" or $breakpoint=="2k" or $breakpoint=="4k" {
+			@media (min-width: #{$query}) {
+				@content;
+			}
+		}
+
+		@else {
+			@media (max-width: #{$query}) {
+				@content;
+			}
+		}
+	}
+
+	@else {
+		@error 'No value found for `#{$breakpoint}`. '
+		+'Please make sure it is defined in `$breakpoints` map.';
+	}
+}
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+	@if $self {
+
+		&,
+		&:hover,
+		&:active,
+		&:focus,
+		&:focus-visible,
+		&--active {
+			@content;
+		}
+	}
+
+	@else {
+
+		&:hover,
+		&:active,
+		&:focus,
+		&:focus-visible,
+		&--active {
+			@content;
+		}
+	}
+}
+
+// css arrows
+@mixin arrow($direction: 'left') {
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: .5625rem;
+    border-style: solid;
+    display: block;
+    position: absolute;
+
+    @if $direction=='left' {
+        border-color: transparent var(--foreground) transparent transparent;
+    }
+
+    @else if $direction=='right' {
+        border-color: transparent transparent transparent var(--foreground);
+    }
+
+    @else if $direction=='top' {
+        border-color: transparent transparent var(--foreground) transparent;
+    }
+
+    @else {
+        border-color: var(--foreground) transparent transparent transparent;
+    }
+}
+
+@mixin hamburger($size: 1rem, $color: var(--foreground)) {
+	.hamburger {
+		width: $size * 1.5;
+		height: $size;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		cursor: pointer;
+
+		&__line {
+			width: 100%;
+			height: calc($size / 8);
+			background: $color;
+			transition: transform .3s ease;
+		}
+
+		&--active &__line:nth-child(2) {
+			opacity: 0;
+		}
+
+		&--active &__line:first-child {
+			transform: translateY(calc($size / 2 - $size / 18)) rotate(-45deg);
+		}
+
+		&--active &__line:last-child {
+			transform: translateY(calc($size / 18 - $size / 2)) rotate(45deg);
+		}
+	}
+}
+
+
+
+/*
+Use for pseudo code
+*/
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
+	content: $content;
+	display: $display;
+	position: $pos;
+}
+
+/*Uses for keyframe*/
+@mixin keyframes($animation-name) {
+	@-webkit-keyframes #{$animation-name} {
+		@content;
+	}
+
+	@-moz-keyframes #{$animation-name} {
+		@content;
+	}
+
+	@-ms-keyframes #{$animation-name} {
+		@content;
+	}
+
+	@-o-keyframes #{$animation-name} {
+		@content;
+	}
+
+	@keyframes #{$animation-name} {
+		@content;
+	}
+}
+
+/*Uses for animation*/
+@mixin animation($str) {
+	-webkit-animation: #{$str};
+	-moz-animation: #{$str};
+	-o-animation: #{$str};
+	animation: #{$str};
+}
+
+/*CSS PREFIX*/
+@mixin css3-prefix($prop, $value) {
+	-webkit-#{$prop}: #{$value};
+	-moz-#{$prop}: #{$value};
+	-ms-#{$prop}: #{$value};
+	-o-#{$prop}: #{$value};
+	#{$prop}: #{$value};
+}
+
+/*Center content vertically*/
+@mixin vertical-center {
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}

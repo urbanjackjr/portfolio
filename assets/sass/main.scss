@@ -1,0 +1,11 @@
+@import "abstract/variables", "abstract/mixins";
+
+@import "base/base", "base/global", "base/animation", "base/typography",
+"base/utilities";
+
+// load here to avoid splash of unstyled header
+@import "components/header";
+
+@import "layouts/default";
+
+@import "pages/contact", "pages/index", "pages/projects", "pages/skills";

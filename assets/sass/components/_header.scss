@@ -1,0 +1,126 @@
+.header-wrapper {
+	width: 100%;
+	max-width: $nav-width;
+
+	@include respond-to("medium") {
+		max-width: 100%;
+	}
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-right: .125rem solid var(--foreground);
+	align-items: flex-start;
+	padding: 1.25rem 1rem;
+	width: $max-nav-width;
+	height: 100vh;
+	background: var(--background);
+	position: relative;
+	transform: translate(calc($nav-width - $max-nav-width));
+	transition: transform 300ms ease;
+	z-index: 2;
+
+	@include respond-to("medium") {
+		flex-direction: row;
+		align-items: center;
+		width: 100%;
+		height: auto;
+		border-right: 0;
+		border-bottom: .125rem solid var(--foreground);
+		padding: 1rem;
+		flex: 0 0 4.28125rem;
+		transform: translate(0);
+	}
+
+	&__section {
+		display: flex;
+		flex-direction: column;
+		transform: translate(calc($max-nav-width - $nav-width));
+		transition: transform 300ms ease;
+		overflow: hidden;
+
+		@include respond-to("medium") {
+			flex-direction: row;
+			transform: translate(0);
+		}
+
+		&--logo {
+			z-index: 3;
+		}
+	}
+
+	&__logo {
+		margin-bottom: 0.75rem;
+		display: block;
+		max-width: 2.75rem;
+
+		@include respond-to("medium") {
+			margin: 0 0.25rem 0 0;
+		}
+	}
+
+	&__link {
+		padding: 0.5rem 0;
+		width: 2.75rem;
+		color: var(--foreground--100);
+		display: flex;
+		align-items: center;
+		font-size: 1.125rem;
+
+		@include on-event {
+			color: var(--foreground);
+		}
+
+		&.router-link-active {
+			color: var(--foreground);
+		}
+
+		&--external {
+			font-size: 1rem;
+
+			@include respond-to("medium") {
+				width: 2.25rem;
+			}
+		}
+	}
+
+	&__icon {
+		margin: 0 .5rem;
+		flex: 0 0 1.75rem;
+
+		&--external {
+			margin: 0 .75rem;
+			flex: 0 0 1.25rem;
+
+			@include respond-to("medium") {
+				margin: 0 .5rem;
+			}
+		}
+	}
+
+	&__nav-title {
+		opacity: 0;
+		margin-left: .25rem;
+		transition: 300ms ease;
+
+		@include respond-to("medium") {
+			display: none;
+		}
+	}
+
+	&:hover {
+		transform: translate(0);
+		z-index: 2;
+	}
+
+	&:hover &__section {
+		transform: translate(0);
+		overflow: visible;
+	}
+
+	&:hover &__nav-title {
+		opacity: 1;
+	}
+}

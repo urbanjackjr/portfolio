@@ -1,0 +1,59 @@
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 300ms ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+}
+
+.list-leave-active {
+  position: absolute;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 200ms ease, transform 300ms ease -150ms;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.page-leave-to {
+  opacity: 0;
+}
+
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 300ms ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide--down-enter-active,
+.slide--down-leave-active {
+  transition: transform 300ms ease;
+}
+
+.slide--down-enter-from,
+.slide--down-leave-to {
+  transform: translateY(-100%);
+}
+
+.slide--right-enter-active,
+.slide--right-leave-active {
+  transition: transform 300ms ease;
+}
+
+.slide--right-enter-from,
+.slide--right-leave-to {
+  transform: translate(-100%);
+}

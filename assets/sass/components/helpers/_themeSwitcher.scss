@@ -1,0 +1,65 @@
+.themeSwitcher {
+    position: relative;
+
+    &__toggler {
+        width: 2.75rem;
+        color: var(--foreground--100);
+        margin-top: .25rem;
+        transition: .3s ease;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+
+        &--active {
+            color: var(--foreground);
+        }
+
+        @include on-event {
+            color: var(--foreground);
+        }
+    }
+
+    &__list {
+        padding: .25rem 0;
+        background: var(--background--700);
+        border: .125rem solid var(--foreground);
+        max-height: 50vh;
+        overflow-y: scroll;
+
+        &--wrapper {
+            position: absolute;
+            top: 0;
+            left: calc(100% + .5rem);
+
+            &::before {
+                top: .75rem;
+                right: 100%;
+
+                @include arrow('left');
+            }
+        }
+    }
+
+    &__item {
+        font-size: 1rem;
+        text-align: center;
+        padding: .25rem 1rem .4rem;
+        line-height: 1;
+        cursor: pointer;
+        position: relative;
+
+        &--current {
+            background: var(--background);
+
+            &::before {
+                left: 0;
+                
+                @include arrow('right');
+            }
+        }
+
+        @include on-event {
+            background: var(--background--800);
+        }
+    }
+}

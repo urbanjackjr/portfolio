@@ -1,0 +1,55 @@
+.project {
+
+    &__filters {
+        padding: 0 3rem;
+        margin-bottom: 2rem;
+        
+        @include respond-to("medium") {
+			padding: 0 2rem;
+		}
+    }
+
+    &__filters-title {
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    &__filter {
+        display: inline-flex;
+        align-items: center;
+        padding: .5rem 1rem;
+        font-size: .75rem;
+        margin: 0 .5rem .5rem 0;
+        line-height: 1;
+        position: relative;
+
+        &--active {
+
+            .button__text {
+                transform: translate(-.5rem);
+            }
+        }
+
+        &--active &-clear {
+            transform: translate(-.25rem, -50%);
+        }
+    }
+
+    &__filter-clear {
+        color: var(--background);
+        width: 1rem;
+        height: 1rem;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(-1rem, -50%);
+        z-index: 1;
+    }
+
+    &__icon {
+        flex: 0 0 1.5rem;
+        margin: 0 .5rem 0 0;
+    }
+}

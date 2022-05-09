@@ -1,0 +1,18 @@
+$default-font-size: 1rem;
+$sans-font: "Outfit",
+sans-serif;
+$mono-font: "Fira Mono",
+monospace;
+
+$nav-width: 5rem;
+$max-nav-width: 10rem;
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+$breakpoints: ("small": 30rem,
+	"medium": 48rem,
+	"large": 80rem,
+	"max": 80rem,
+	"2k": 160rem,
+	"4k": 240rem) !default;

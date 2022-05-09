@@ -1,0 +1,103 @@
+$size: 5rem;
+$speed: 3s;
+$peakopacity: 0.7;
+
+$sizes: ("max": 5rem,
+    "large": 2.5rem);
+
+.arrows {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    cursor: pointer;
+
+    @each $width,
+    $size in $sizes {
+        @include respond-to($width) {
+            width: calc($size * 1.41);
+            height: calc($size * 1.61);
+        }
+    }
+
+    &--top {
+        top: 0;
+        bottom: auto;
+        transform: translate(-50%) rotate(180deg);
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+
+        @each $width,
+        $size in $sizes {
+            @include respond-to($width) {
+                width: calc(9 / 10 * $size);
+                height: calc(9 / 10 * $size);
+                border-left: calc($size / 10) solid var(--foreground--400);
+                border-bottom: calc($size / 10) solid var(--foreground--400);
+            }
+        }
+    }
+
+    &::before {
+        transform: translate($size * .205, -$size * .41) rotate(-45deg);
+        animation: arrows $speed linear infinite;
+    }
+
+    &::after {
+        transform: translate($size * .205, $size * .41) rotate(-45deg);
+        animation: arrows $speed linear infinite calc($speed / -2);
+    }
+}
+
+@keyframes arrows {
+    0% {
+        opacity: 0;
+        transform: translate($size * .205, -$size * .41) rotate(-45deg);
+    }
+
+    10%,
+    90% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: $peakopacity;
+        transform: translate($size * .205, 0) rotate(-45deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate($size * .205, $size * .41) rotate(-45deg);
+    }
+}
+
+@each $width,
+$size in $sizes {
+    @include respond-to($width) {
+        @keyframes arrows {
+            0% {
+                opacity: 0;
+                transform: translate($size * .205, -$size * .41) rotate(-45deg);
+            }
+
+            10%,
+            90% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: $peakopacity;
+                transform: translate($size * .205, 0) rotate(-45deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate($size * .205, $size * .41) rotate(-45deg);
+            }
+        }
+    }
+}

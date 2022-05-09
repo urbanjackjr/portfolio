@@ -1,0 +1,164 @@
+.project {
+	background: var(--background--800);
+	width: 100%;
+	padding: 2rem 3rem;
+	min-height: 100vh;
+	position: sticky;
+	top: 0;
+	display: flex;
+	align-items: center;
+	border-top: .0625rem solid var(--foreground--400);
+
+	@include respond-to("large") {
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	@include respond-to("medium") {
+		min-height: calc(100vh - 4.28125rem);
+	}
+
+	&--column {
+		position: relative;
+		padding: 5rem 3rem 4rem;
+
+		@include respond-to("small") {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+	}
+
+	&--first {
+
+		@include respond-to("medium") {
+			padding-top: 3rem;
+		}
+	}
+
+	&__sections {
+		display: flex;
+		flex-flow: row wrap;
+		max-width: 78.25rem;
+
+		@include respond-to("large") {
+			display: block;
+		}
+	}
+
+	&__section {
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: flex-start;
+		margin: 0 0 2rem;
+		position: relative;
+		flex: 1 1 25rem;
+		padding: 0 1.5rem;
+
+		@include respond-to("medium") {
+			padding: 0;
+		}
+
+		&--thumbnail {
+			margin: 0 1.5rem 2rem;
+			padding: 0;
+			max-width: 33rem;
+
+			@include respond-to("small") {
+				padding-left: 1rem;
+			}
+		}
+
+		&--details {
+			flex-basis: 35rem;
+			max-width: 50rem;
+		}
+
+		&--technologies {
+			flex: 1 0 100%;
+		}
+
+		&:last-child {
+			margin: 0;
+		}
+	}
+
+	&__image {
+		position: relative;
+		width: 100%;
+		padding-top: 56.25%;
+		height: 100%;
+		transition: 300ms ease;
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			transform: translate(-1rem, -1rem);
+			z-index: 0;
+			transition: 300ms ease;
+			outline: .125rem solid var(--foreground);
+			background: var(--background);
+		}
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			object-fit: cover;
+			z-index: 1;
+		}
+	}
+
+	&__title {
+		&--h3 {
+			margin-bottom: 1.5rem;
+		}
+	}
+
+	&__desc {
+		margin: 1.5rem 0 1.5rem;
+		position: relative;
+	}
+
+	&__links {
+		display: flex;
+		flex-flow: row nowrap;
+	}
+
+	&__link-item {
+		width: 100%;
+		max-width: 1.75rem;
+		margin: 0 1.25rem 0 0;
+	}
+
+	&__link {
+		color: var(--foreground--400);
+	}
+
+	&__list {
+		display: flex;
+		flex-flow: row wrap;
+	}
+
+	&__technology {
+		margin-right: 3rem;
+		flex: 1 0 auto;
+	}
+
+	&:hover {
+		.project__image {
+
+			@include respond-to("small") {
+				transform: translate(-0.5rem);
+			}
+
+			&::after {
+				transform: translate(0, 0);
+			}
+		}
+	}
+}
