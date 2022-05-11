@@ -23,6 +23,13 @@ export const useParallaxSections = (el: Ref<HTMLElement | null>, scrollEl: Ref<H
         }
     }
 
+    const translateBasedOnScroll = (): void => {
+        const intersetionPercentage: number = el.value && childEl.value ? Math.max(100 - maxTranslatePercentage(el.value, childEl.value), percentageSeen(el.value)) : 0;
+
+        childEl.value && (childEl.value.style.transform = 'translateY(calc(-100% + ' + intersetionPercentage.toString() + '%))');
+    }
+
+    // Event listener functions
     const parallaxScrollListener = (): void => {
         // debounce to avoid problems with navigation
         scrollEl.value?.addEventListener('scroll', debounce(parallaxScrollListenerCallback, 50));
@@ -45,12 +52,6 @@ export const useParallaxSections = (el: Ref<HTMLElement | null>, scrollEl: Ref<H
         scrollEl.value && resizeObserver.observe(scrollEl.value);
     }
 
-    const translateBasedOnScroll = (): void => {
-        const intersetionPercentage: number = el.value && childEl.value ? Math.max(100 - maxTranslatePercentage(el.value, childEl.value), percentageSeen(el.value)) : 0;
-
-        childEl.value && (childEl.value.style.transform = 'translateY(calc(-100% + ' + intersetionPercentage.toString() + '%))');
-    }
-
     onMounted(() => {
         scrollEl.value = el.value && el.value.parentElement && el.value.parentElement.parentElement;
         parallaxScrollListener();
@@ -65,8 +66,10 @@ export const useParallaxSections = (el: Ref<HTMLElement | null>, scrollEl: Ref<H
     })
 
     onUnmounted(() => {
+        // Remove event listeners on unmount
         scrollEl.value && resizeObserver.unobserve(scrollEl.value);
-        scrollEl.value?.removeEventListener('scroll', parallaxScrollListenerCallback);
+        scrollEl.value?.removeEventListener('scroll', debounce(parallaxScrollListenerCallback, 50));
+        scrollEl.value?.removeEventListener('scroll', childEl && translateBasedOnScroll);
     })
 
     return { onScrollTranslations, scrollToSection };

@@ -1,5 +1,5 @@
 <template>
-	<form class="form" autocomplete="off" method="post" @submit.prevent="(e: any) => formValidation(e)">
+	<form class="form" autocomplete="off" method="post" @submit.prevent="() => formValidation()">
 		<li v-for="(field, key) in formFields" :class="['form__field', `form__field--${field.name}`]" :key="key">
 			<input
 				v-if="!field.tag || field.tag === 'input'"
@@ -9,7 +9,7 @@
 				:placeholder="field.placeholder"
 				v-model="field.inputValue"
 				@focus="clearErrors(key)"
-				@focusout="(e: any) => field.validation && field.validation(e.target.value)"
+				@focusout="(e: Event) => singleValidation(e, field)"
 			/>
 			<textarea
 				v-else-if="field.tag === 'textarea'"
@@ -19,11 +19,11 @@
 				:placeholder="field.placeholder"
 				v-model="field.inputValue"
 				@focus="clearErrors(key)"
-				@focusout="(e: any) => field.validation && field.validation(e.target.value)"
+				@focusout="(e: Event) => singleValidation(e, field)"
 			/>
 			<label for="name" class="form__label sr-only">{{ field.placeholder }}</label>
 			<Transition name="slide--down">
-				<label v-if="field.error" for="name" class="form__error">{{ field.error }}</label>
+				<label v-if="field.error" for="name" class="form__error">{{ field.errorMessage }}</label>
 			</Transition>
 		</li>
 		<li class="form__field">
@@ -40,9 +40,14 @@
 	</form>
 </template>
 <script setup lang="ts">
+// !!! IMPORTANT !!!
+// INPUT AND TEXTAREA ARE DONE THIS WAY, BECAUSE VUE HAS A PROBLEM WITH CAPTURING EVENTS WITH COMPONENT :IS
+
 import "@/assets/sass/components/_form.scss";
 
 import Loading from "@/components/helpers/Loading.vue";
+
+import { nameValidation, emailValidation, emptyValidation } from "@/utils/validator";
 
 interface FormFields {
 	[key: string]: {
@@ -50,48 +55,15 @@ interface FormFields {
 		tag?: "input" | "textarea";
 		type: string;
 		placeholder?: string;
-		validation: (a: string) => boolean;
-		error?: string;
+		validation: typeof nameValidation;
+		error: boolean;
 		inputValue: string;
+		errorMessage: string;
 	};
 }
 
-type singleValidation = (a: string) => boolean;
-
-const nameValidation: singleValidation = (value) => {
-	if (value.length > 1) {
-		return true;
-	}
-
-	formFields.name.error = "Name should contain at least 2 characters.";
-	return false;
-};
-
-const emailValidation: singleValidation = (value) => {
-	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-		return true;
-	}
-
-	formFields.email.error = "Enter a valid email address.";
-	return false;
-};
-
-const subjectValidation: singleValidation = (value) => {
-	if (value) {
-		return true;
-	}
-
-	formFields.subject.error = "Type in a subject of the message.";
-	return false;
-};
-
-const messageValidation: singleValidation = (value) => {
-	if (value) {
-		return true;
-	}
-
-	formFields.message.error = "The message should not be empty.";
-	return false;
+const singleValidation = (e: Event, field: typeof formFields.name): void => {
+	field.error = !field.validation((e.target as HTMLTextAreaElement).value);
 };
 
 const formLoading = ref<boolean>(false);
@@ -103,41 +75,52 @@ const validationMessage = ref<string | undefined>();
 const formFields = reactive<FormFields>({
 	name: {
 		name: "name",
+		tag: "input",
 		type: "text",
 		placeholder: "Name",
 		validation: nameValidation,
 		inputValue: "",
+		error: false,
+		errorMessage: "Name should contain at least 2 characters.",
 	},
 	email: {
 		name: "email",
+		tag: "input",
 		type: "email",
 		placeholder: "Email",
 		validation: emailValidation,
 		inputValue: "",
+		error: false,
+		errorMessage: "Enter a valid email address.",
 	},
 	subject: {
 		name: "subject",
+		tag: "input",
 		type: "text",
 		placeholder: "Subject",
-		validation: subjectValidation,
+		validation: emptyValidation,
 		inputValue: "",
+		error: false,
+		errorMessage: "Type in a subject of the message.",
 	},
 	message: {
 		name: "message",
 		tag: "textarea",
 		type: "text",
 		placeholder: "Message",
-		validation: messageValidation,
+		validation: emptyValidation,
 		inputValue: "",
+		error: false,
+		errorMessage: "The message should not be empty.",
 	},
 });
 
-const formValidation = (e: any): boolean => {
+const formValidation = (): boolean => {
 	const formValues: { [key: string]: string } = {};
 	validationMessage.value = undefined;
 
 	for (const field in formFields) {
-		formFields[field].validation(formFields[field].inputValue);
+		formFields[field].error = !formFields[field].validation(formFields[field].inputValue);
 		if (formFields[field].error) {
 			validationMessage.value = "There are some errors in the form. Check and try again.";
 		}
@@ -193,6 +176,6 @@ const formValidation = (e: any): boolean => {
 };
 
 const clearErrors = (field: keyof FormFields): void => {
-	formFields[field].error = undefined;
+	formFields[field].error = false;
 };
 </script>

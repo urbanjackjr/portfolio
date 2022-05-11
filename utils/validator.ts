@@ -1,25 +1,31 @@
-type singleValidation = (a: string) => boolean;
+type singleValidation = (a: string, callback?: () => unknown) => boolean;
 
-export const nameValidation: singleValidation = (value) => {
+export const nameValidation: singleValidation = (value, callback) => {
     if (value.length > 1) {
         return true;
     }
 
+    typeof callback !== "undefined" && callback();
+
     return false;
 }
 
-export const emailValidation: singleValidation = (value) => {
+export const emailValidation: singleValidation = (value, callback) => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
         return true;
     }
 
+    typeof callback !== "undefined" && callback();
+
     return false;
 }
 
-export const emptyValidation: singleValidation = (value) => {
+export const emptyValidation: singleValidation = (value, callback) => {
     if (value) {
         return true;
     }
+
+    typeof callback !== "undefined" && callback();
 
     return false;
 }

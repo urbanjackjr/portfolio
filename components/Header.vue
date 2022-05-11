@@ -8,7 +8,7 @@
 				<ThemeSwitcher />
 			</div>
 			<nav class="header__section header__section--links">
-				<NuxtLink v-for="(link, key, index) in links" class="header__link" :key="link.to" :to="link.to">
+				<NuxtLink v-for="(link, key, index) in links" class="header__link" :key="link.to" :to="link.to" :aria-label="key">
 					<component :is="link.icon" class="header__icon" />
 					<span class="header__nav-title">{{ key }}</span>
 				</NuxtLink>
@@ -19,6 +19,7 @@
 					:href="link.to"
 					class="header__link header__link--external"
 					target="_blank"
+					:aria-label="key"
 				>
 					<component :is="link.icon" class="header__icon header__icon--external" />
 					<span class="header__nav-title">{{ key }}</span>

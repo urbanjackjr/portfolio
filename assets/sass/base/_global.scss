@@ -102,3 +102,12 @@
 		color: var(--foreground);
 	}
 }
+
+.back-to-top {
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	z-index: 4;
+	padding: .75rem;
+	background: var(--background--700);
+}
