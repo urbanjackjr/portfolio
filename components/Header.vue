@@ -2,7 +2,7 @@
 	<div class="header-wrapper">
 		<header class="header">
 			<div class="header__section header__section--logo">
-				<NuxtLink class="header__logo" to="/">
+				<NuxtLink class="header__logo" to="/" aria-label="Logo link to home">
 					<Logo />
 				</NuxtLink>
 				<ThemeSwitcher />
