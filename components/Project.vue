@@ -8,7 +8,7 @@
 		<div class="project__sections" ref="projectElementChild">
 			<NuxtLink class="project__section project__section--thumbnail" :to="links.demo">
 				<figure class="project__image">
-					<img :src="img.src" :alt="img.alt" />
+					<img :src="img.src" :alt="`Thumbnail of ${title} project.`" loading="lazy" />
 				</figure>
 			</NuxtLink>
 			<section class="project__section project__section--details">

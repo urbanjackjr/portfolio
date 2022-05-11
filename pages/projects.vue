@@ -42,7 +42,7 @@ const listElement = ref<HTMLElement | null>(null);
 const projectInfo = reactive<ProjectInfo>({
 	periodic: {
 		img: {
-			src: "/images/periodic-table.png",
+			src: "/images/periodic-table.jpg",
 			alt: "",
 		},
 		title: "Periodic Table",
@@ -55,7 +55,7 @@ const projectInfo = reactive<ProjectInfo>({
 	},
 	portfolio: {
 		img: {
-			src: "/images/portfolio.png",
+			src: "/images/portfolio.jpg",
 			alt: "",
 		},
 		title: "Personal Portfolio",
@@ -68,7 +68,7 @@ const projectInfo = reactive<ProjectInfo>({
 	},
 	tableOfContents: {
 		img: {
-			src: "/images/table-of-contents.png",
+			src: "/images/table-of-contents.jpg",
 			alt: "",
 		},
 		title: "Table of Contents",
@@ -81,7 +81,7 @@ const projectInfo = reactive<ProjectInfo>({
 	},
 	learnLanguageTextbox: {
 		img: {
-			src: "/images/textbox.png",
+			src: "/images/textbox.jpg",
 			alt: "",
 		},
 		title: "Language Learning Textbox",
@@ -93,7 +93,7 @@ const projectInfo = reactive<ProjectInfo>({
 	},
 	bullsBears: {
 		img: {
-			src: "/images/bullsbears.png",
+			src: "/images/bullsbears.jpg",
 			alt: "",
 		},
 		title: "BullsBears",
@@ -105,7 +105,7 @@ const projectInfo = reactive<ProjectInfo>({
 	},
 	wigraGeodezja: {
 		img: {
-			src: "/images/wigra-geodezja.png",
+			src: "/images/wigra-geodezja.jpg",
 			alt: "",
 		},
 		title: "Wigra Geodezja",
@@ -117,7 +117,7 @@ const projectInfo = reactive<ProjectInfo>({
 	},
 	iBMF: {
 		img: {
-			src: "/images/ibmf.png",
+			src: "/images/ibmf.jpg",
 			alt: "",
 		},
 		title: "iBMF",
@@ -129,7 +129,7 @@ const projectInfo = reactive<ProjectInfo>({
 	},
 	theSwitch: {
 		img: {
-			src: "/images/theswitch.png",
+			src: "/images/theswitch.jpg",
 			alt: "",
 		},
 		title: "The Switch",
@@ -141,7 +141,7 @@ const projectInfo = reactive<ProjectInfo>({
 	},
 	kancelariaKaszyca: {
 		img: {
-			src: "/images/kancelaria-kaszyca.png",
+			src: "/images/kancelaria-kaszyca.jpg",
 			alt: "",
 		},
 		title: "Kancelaria Kaszyca",
