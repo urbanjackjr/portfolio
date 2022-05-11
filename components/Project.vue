@@ -12,7 +12,7 @@
 				:aria-label="`Thumbnail that links to ${title} project demo.`"
 			>
 				<figure class="project__image">
-					<img :src="img.src" :alt="`Thumbnail of ${title} project.`" loading="lazy" />
+					<img :src="img.src" :alt="`Thumbnail of ${title} project.`" :loading="first ? 'eager' : 'lazy'" />
 				</figure>
 			</NuxtLink>
 			<section class="project__section project__section--details">
