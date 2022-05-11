@@ -6,19 +6,28 @@
 			@click="projectElement && scrollElement && scrollToSection(projectElement, scrollElement, 'prev')"
 		/>
 		<div class="project__sections" ref="projectElementChild">
-			<NuxtLink class="project__section project__section--thumbnail" :to="links.demo">
+			<NuxtLink
+				class="project__section project__section--thumbnail"
+				:to="links.demo"
+				:aria-label="`Thumbnail that links to ${title} project demo.`"
+			>
 				<figure class="project__image">
-					<img :src="img.src" :alt="img.alt" />
+					<img :src="img.src" :alt="`Thumbnail of ${title} project.`" loading="lazy" />
 				</figure>
 			</NuxtLink>
 			<section class="project__section project__section--details">
 				<h2 class="project__title">
-					<NuxtLink :href="links.demo">{{ title }}</NuxtLink>
+					<NuxtLink :href="links.demo" :aria-label="`Heading that links to ${title} project demo.`">{{ title }}</NuxtLink>
 				</h2>
 				<p class="main__desc project__desc" v-html="desc"></p>
 				<ul class="project__links">
 					<li v-for="(link, key) of links" :key="link" class="project__link-item">
-						<NuxtLink :href="link" class="project__link" target="_blank">
+						<NuxtLink
+							:href="link"
+							class="project__link"
+							target="_blank"
+							:aria-label="`Icon that links to ${title} project's ${key}.`"
+						>
 							<component :is="returnIcon(key)" />
 						</NuxtLink>
 					</li>
