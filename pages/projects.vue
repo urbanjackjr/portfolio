@@ -64,7 +64,7 @@ const projectInfo = reactive<ProjectInfo>({
 			github: "https://github.com/urbanjackjr/portfolio",
 			demo: "/",
 		},
-		technologies: ["Vue 3", "Vuex", "Vite", "REST API", "Sass", "PostCSS"],
+		technologies: ["Nuxt", "Typescript", "NodeJS", "REST API", "Sass", "PostCSS"],
 	},
 	tableOfContents: {
 		img: {
