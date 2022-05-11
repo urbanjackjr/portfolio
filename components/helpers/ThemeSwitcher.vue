@@ -1,6 +1,6 @@
 <template>
 	<div @mouseleave="isListOpen = false" class="themeSwitcher">
-		<button @click="toggleList" :class="['themeSwitcher__toggler', isListOpen && 'themeSwitcher__toggler--active']">
+		<button @click="toggleList" :class="['themeSwitcher__toggler', isListOpen && 'themeSwitcher__toggler--active']" aria-label="Themes">
 			<Brush class="header__icon" />
 			<span class="header__nav-title">Themes</span>
 		</button>

@@ -97,6 +97,10 @@
 			@include respond-to("medium") {
 				margin: 0 .5rem;
 			}
+
+			@include respond-to("small") {
+				flex: 0 0 1.4rem;
+			}
 		}
 	}
 

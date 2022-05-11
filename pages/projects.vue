@@ -18,12 +18,16 @@
 			/>
 		</ul>
 		<ProjectsNav :navLinks="projectInfo" :projectElement="listElement" :scrollElement="scrollElement" />
+		<BackToTop :show="showBackToTopButton" @click="scrollElement && scrollToTop(scrollElement)" />
 	</main>
 </template>
 <script setup lang="ts">
 import Project from "@/components/Project.vue";
 import ProjectFilter from "@/components/helpers/ProjectFilter.vue";
 import ProjectsNav from "@/components/helpers/ProjectsNav.vue";
+import BackToTop from "@/components/helpers/BackToTop.vue";
+
+import { scrollToTop } from "@/utils/utils";
 
 import type { ProjectInfo } from "@/utils/types";
 
@@ -46,6 +50,19 @@ const projectInfo = reactive<ProjectInfo>({
 		links: {
 			github: "https://github.com/urbanjackjr/periodic-table",
 			demo: "https://urbanjackjr.github.io/",
+		},
+		technologies: ["Vue 3", "Vuex", "Vite", "REST API", "Sass", "PostCSS"],
+	},
+	portfolio: {
+		img: {
+			src: "/images/portfolio.png",
+			alt: "",
+		},
+		title: "Personal Portfolio",
+		desc: "Personal portfolio website build using technologies such as: Nuxt 3 together with TypeScript, Sass and NodeJS with NodeMailer. The application is rendered using Server Side Rendering.",
+		links: {
+			github: "https://github.com/urbanjackjr/portfolio",
+			demo: "/",
 		},
 		technologies: ["Vue 3", "Vuex", "Vite", "REST API", "Sass", "PostCSS"],
 	},
@@ -136,6 +153,7 @@ const projectInfo = reactive<ProjectInfo>({
 	},
 });
 
+// Project filtering
 const filteredProjects = ref<ProjectInfo>(projectInfo);
 
 const allTechnologies = (): string[] => {
@@ -174,4 +192,19 @@ const filterProjectsByTechnology = (filter: string | undefined) => {
 		});
 	}
 };
+
+// show Back to top button logic
+const showBackToTopButton = ref<boolean>(false);
+
+const shouldShowBackToTopButton = (): void => {
+	showBackToTopButton.value = scrollElement.value && scrollElement.value.scrollTop > 100 ? true : false;
+};
+
+onMounted(() => {
+	scrollElement.value?.addEventListener("scroll", shouldShowBackToTopButton);
+});
+
+onUnmounted(() => {
+	scrollElement.value?.removeEventListener("scroll", shouldShowBackToTopButton);
+});
 </script>

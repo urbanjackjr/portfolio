@@ -13,14 +13,14 @@
 			</NuxtLink>
 			<section class="project__section project__section--details">
 				<h2 class="project__title">
-					<a :href="links.demo">{{ title }}</a>
+					<NuxtLink :href="links.demo">{{ title }}</NuxtLink>
 				</h2>
 				<p class="main__desc project__desc" v-html="desc"></p>
 				<ul class="project__links">
 					<li v-for="(link, key) of links" :key="link" class="project__link-item">
-						<a :href="link" class="project__link" target="_blank">
+						<NuxtLink :href="link" class="project__link" target="_blank">
 							<component :is="returnIcon(key)" />
-						</a>
+						</NuxtLink>
 					</li>
 				</ul>
 			</section>
