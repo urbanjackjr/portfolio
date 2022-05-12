@@ -32,7 +32,7 @@ export const useParallaxSections = (el: Ref<HTMLElement | null>, scrollEl: Ref<H
     // Event listener functions
     const parallaxScrollListener = (): void => {
         // debounce to avoid problems with navigation
-        scrollEl.value?.addEventListener('scroll', debounce(parallaxScrollListenerCallback, 50));
+        scrollEl.value?.addEventListener('scroll', debounce(parallaxScrollListenerCallback, 100));
         scrollEl.value?.addEventListener('scroll', childEl && translateBasedOnScroll);
     }
 
@@ -68,7 +68,7 @@ export const useParallaxSections = (el: Ref<HTMLElement | null>, scrollEl: Ref<H
     onUnmounted(() => {
         // Remove event listeners on unmount
         scrollEl.value && resizeObserver.unobserve(scrollEl.value);
-        scrollEl.value?.removeEventListener('scroll', debounce(parallaxScrollListenerCallback, 50));
+        scrollEl.value?.removeEventListener('scroll', debounce(parallaxScrollListenerCallback, 100));
         scrollEl.value?.removeEventListener('scroll', childEl && translateBasedOnScroll);
     })
 
