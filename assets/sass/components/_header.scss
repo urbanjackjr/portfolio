@@ -73,7 +73,8 @@
 			color: var(--foreground);
 		}
 
-		&.router-link-active {
+		&--active,
+		&--exact {
 			color: var(--foreground);
 		}
 

@@ -8,10 +8,21 @@
 				<ThemeSwitcher />
 			</div>
 			<nav class="header__section header__section--links">
-				<NuxtLink v-for="(link, key, index) in links" class="header__link" :key="link.to" :to="link.to" :aria-label="key">
+				<NuxtLink
+					v-for="(link, key, index) in links"
+					class="header__link"
+					activeClass="header__link--active"
+					exactActiveClass="header__link--exact"
+					:key="link.to"
+					:to="link.to"
+					:aria-label="key"
+				>
 					<component :is="link.icon" class="header__icon" />
 					<span class="header__nav-title">{{ key }}</span>
 				</NuxtLink>
+				<a href="/jacekUrbanCV--EN.pdf" class="header__link" aria-label="Download CV" download>
+					<CVDownload class="header__icon" />
+				</a>
 			</nav>
 			<div class="header__section header__section--links">
 				<NuxtLink
@@ -34,6 +45,7 @@
 
 import Code from "./icons/Code.vue";
 import Contact from "./icons/Contact.vue";
+import CVDownload from "./icons/CVDownload.vue";
 import Home from "./icons/Home.vue";
 import Badge from "./icons/Badge.vue";
 import Github from "./icons/Github.vue";
