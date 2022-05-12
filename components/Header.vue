@@ -22,6 +22,7 @@
 				</NuxtLink>
 				<a href="/jacekUrbanCV--EN.pdf" class="header__link" aria-label="Download CV" download>
 					<CVDownload class="header__icon" />
+					<span class="header__nav-title">CV</span>
 				</a>
 			</nav>
 			<div class="header__section header__section--links">
